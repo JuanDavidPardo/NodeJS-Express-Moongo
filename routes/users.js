@@ -53,7 +53,7 @@ router.post('/register', (req, res) => {
     .then(user => {
       if(user){
         req.flash('error_msg', 'email alredy registered');
-        res.redirect('/users/login');
+        res.redirect('/users/register');
       }else{
         const newUser = new User({
           name: req.body.name,
@@ -66,8 +66,8 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser.save()
             .then(user => {
-              req.flash('succes_msg', 'You are now registered and can log in');
-              res.redirect('users/register ');
+              req.flash('success_msg', 'You are now registered and can log in');
+              res.redirect('/users/login');
             }).catch(
               err => {
                 console.log(err);
